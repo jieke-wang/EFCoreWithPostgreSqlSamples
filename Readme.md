@@ -11,6 +11,8 @@ dotnet tool update --global dotnet-ef
 dotnet tool uninstall --global dotnet-ef
 ```
 
+# Code First
+
 **项目结构**
 
 - Api: crud服务
@@ -78,5 +80,20 @@ curl -X 'PUT' \
 curl -X 'DELETE' \
   'https://localhost:5001/api/Account/1' \
   -H 'accept: text/plain'
+```
+
+**Db First**
+
+**项目结构**
+
+- DbFirstConsoleApp: 启动项目
+  - Microsoft.EntityFrameworkCore.Design
+- DALEntity: 数据访问层
+  - Npgsql
+  - Npgsql.EntityFrameworkCore.PostgreSQL
+
+```powershell
+# 使用cmd进入项目跟目录
+dotnet ef dbcontext scaffold "User ID=demo_user; Password=password; Host=192.168.199.133; Port=5432; Database=demo_db;" "Npgsql.EntityFrameworkCore.PostgreSQL" -o "Entities" -c "PostgreDbContext" -d -p DALEntity -s DbFirstConsoleApp -f --json --no-build -v
 ```
 
